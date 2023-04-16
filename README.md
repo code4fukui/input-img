@@ -15,3 +15,8 @@ btn.onclick = () => {
 }
 </script>
 ```
+
+options
+- maxwidth 最大横幅(px) デフォルト 1220
+- maxsize 最大サイズ(MB) デフォルト 3MB
+- quality JPEG品質 デフォルト 0.9

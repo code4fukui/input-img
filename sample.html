@@ -1,7 +1,7 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
 
 <script type="module" src="https://code4fukui.github.io/input-img/input-img.js"></script>
-<input-img id="img">
+<input-img id="img"></input-img>
 <button id="btn">送信</button>
 
 <script type="module">
@@ -9,3 +9,9 @@ btn.onclick = () => {
   alert(img.value);
 }
 </script>
+
+<style>
+input-img img {
+  width: 95vw;
+}
+</style>
