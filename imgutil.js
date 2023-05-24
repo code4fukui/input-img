@@ -82,15 +82,10 @@ imgutil.getImageByImageData = async (imgdata) => {
 imgutil.loadResizedImage = async (file, maxw, maxsize) => {
   //console.log(file, maxw, maxsize);
   let img = null;
-  console.log(file.name.toLowerCase());
   if (file.name.toLowerCase().endsWith(".heic")) {
-    console.log("heic")
-    const module = await import("https://code4fukui.github.io/HEIC/HEIC.js");
-    console.log(module)
-    const HEIC = module.HEIC;
+    const { HEIC } = await import("https://code4fukui.github.io/HEIC/HEIC.js");
     const data = new Uint8Array(await readAsArrayBufferAsync(file));
     const imgdata = await HEIC.decode(data);
-    console.log(imgdata);
     img = await imgutil.getImageByImageData(imgdata);
   } else {
     img = new Image();
