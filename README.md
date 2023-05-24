@@ -2,6 +2,10 @@
 
 画像入力コンポーネント
 
+## Demo
+
+- [demo](https://code4fukui.github.io/input-img/)
+
 ## Usage
 
 ```html
