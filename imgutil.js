@@ -1,5 +1,6 @@
 //import { parseSize } from "./parseSize.js";
 import { parseSize } from "https://js.sabae.cc/parseSize.js";
+import { readAsArrayBufferAsync } from "https://js.sabae.cc/readAsArrayBufferAsync.js";
 
 const imgutil = {};
 
@@ -53,32 +54,55 @@ imgutil.resizeImage = async (img, mimeType, maxw) => {
   canvas.width = dw;
   canvas.height = dh;
   const g = canvas.getContext("2d");
-  console.log(2)
   g.drawImage(img, 0, 0, iw, ih, 0, 0, dw, dh);
-  console.log(mimeType, iw, ih, dw, dh)
+  //console.log(mimeType, iw, ih, dw, dh)
   const dataurl = canvas.toDataURL(mimeType);
   const img2 = new Image();
-  console.log(3)
   img2.src = dataurl;
-  console.log(img2)
   await imgutil.waitImageLoad(img2);
-  console.log(4)
   return img2;
 };
 
-imgutil.loadResizedImage = async (file, maxw, maxsize) => {
-  console.log(file, maxw, maxsize);
+imgutil.getImageByImageData = async (imgdata) => {
+  const canvas = document.createElement("canvas");
+  canvas.width = imgdata.width;
+  canvas.height = imgdata.height;
+  const ctx = canvas.getContext("2d");
+  const imgd = ctx.createImageData(imgdata.width, imgdata.height);
+  for (let i = 0; i < imgd.data.length; i++) {
+    imgd.data[i] = imgdata.data[i];
+  }
+  ctx.putImageData(imgd, 0, 0);
   const img = new Image();
-  console.log(file)
-  img.src = URL.createObjectURL(file);
-  console.log(img.src)
+  img.src = canvas.toDataURL("image/jpeg", 1.0);
   await imgutil.waitImageLoad(img);
-  console.log(file.size)
-  if (file.type.indexOf("svg") >= 0 && file.size <= parseSize(maxsize)) {
-    console.log("just");
+  return img;
+};
+
+imgutil.loadResizedImage = async (file, maxw, maxsize) => {
+  //console.log(file, maxw, maxsize);
+  let img = null;
+  console.log(file.name.toLowerCase());
+  if (file.name.toLowerCase().endsWith(".heic")) {
+    console.log("heic")
+    const module = await import("https://code4fukui.github.io/HEIC/HEIC.js");
+    console.log(module)
+    const HEIC = module.HEIC;
+    const data = new Uint8Array(await readAsArrayBufferAsync(file));
+    const imgdata = await HEIC.decode(data);
+    console.log(imgdata);
+    img = await imgutil.getImageByImageData(imgdata);
+  } else {
+    img = new Image();
+    img.src = URL.createObjectURL(file);
+    await imgutil.waitImageLoad(img);
+  }
+  if (file.type.indexOf("svg") >= 0) {
     return img;
   }
-  console.log("resi");
+  if (file.size <= parseSize(maxsize) && img.width <= maxw) {
+    return img;
+  }
   const res = await imgutil.resizeImage(img, file.type, maxw);
   return res;
 };

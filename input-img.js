@@ -1,5 +1,6 @@
 import { Base64 } from "https://js.sabae.cc/Base64.js";
-import { imgutil } from "https://code4fukui.github.io/input-image/imgutil.js";
+//import { imgutil } from "https://code4fukui.github.io/input-image/imgutil.js";
+import { imgutil } from "./imgutil.js";
 
 class InputImg extends HTMLElement {
   constructor(opts) {
