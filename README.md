@@ -15,8 +15,12 @@
 
 <script type="module">
 btn.onclick = () => {
+  const image = new Image();
+  image.src = "data:image/png;base64," + img.value;
+  document.body.appendChild(image);
+
   alert(img.value);
-}
+};
 </script>
 ```
 
