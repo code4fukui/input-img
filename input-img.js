@@ -19,6 +19,7 @@ class InputImg extends HTMLElement {
     const multiple = this.getAttribute("multiple") != null;
 
     const inp = document.createElement("input");
+    this.inp = inp;
     this.appendChild(inp);
     inp.type = "file";
     inp.accept = accept;
@@ -125,6 +126,11 @@ class InputImg extends HTMLElement {
   }
 
   set value(bin) {
+    if (bin == "") {
+      this.inp.value = "";
+      this.imgc.innerHTML = "";
+      return;
+    }
     const imgs = bin.split(",");
     // todo multiple
     /*
