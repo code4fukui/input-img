@@ -1,17 +1,21 @@
 # input-img
 
-画像入力コンポーネント
+An image input component.
 
 ## Demo
-
 - [demo](https://code4fukui.github.io/input-img/)
 
-## Usage
+## Features
+- Resizes image to a maximum width
+- Enforces a maximum file size
+- Configures JPEG quality
+- Supports multiple image uploads
 
+## Usage
 ```html
 <script type="module" src="https://code4fukui.github.io/input-img/input-img.js"></script>
 <input-img id="img"></input-img>
-<button id="btn">送信</button>
+<button id="btn">Submit</button>
 
 <script type="module">
 btn.onclick = () => {
@@ -24,7 +28,10 @@ btn.onclick = () => {
 </script>
 ```
 
-options
-- maxwidth 最大横幅(px) デフォルト 1220
-- maxsize 最大サイズ(MB) デフォルト 3MB
-- quality JPEG品質 デフォルト 0.9
+Options:
+- `maxwidth`: Maximum width (px), default 1220
+- `maxsize`: Maximum size (MB), default 3MB
+- `quality`: JPEG quality, default 0.9
+
+## License
+MIT License
