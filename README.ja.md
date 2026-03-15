@@ -3,11 +3,9 @@
 画像入力コンポーネント
 
 ## デモ
-
 - [デモ](https://code4fukui.github.io/input-img/)
 
 ## 機能
-
 - 画像ファイルを入力できる
 - 最大サイズと品質を設定できる
 - 複数の画像を選択できる
@@ -36,5 +34,4 @@ btn.onclick = () => {
 - `quality`: JPEG品質、デフォルト 0.9
 
 ## ライセンス
-
 MIT License
