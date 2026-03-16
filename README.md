@@ -36,4 +36,4 @@ Options:
 - `quality`: JPEG quality, default 0.9
 
 ## License
-MIT License
+MIT License — see [LICENSE](LICENSE).
